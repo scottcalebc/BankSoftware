@@ -1,7 +1,12 @@
 package application;
 	
 import java.io.IOException;
+import java.util.ArrayList;
+
+import application.model.Account;
 import application.model.ApplicationFileWriter;
+import application.model.Transaction;
+import application.model.Users;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -33,5 +38,21 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+//		
+//		Users user = new Users("username", "password");
+//		Users user1 = new Users("username1", "pa1ssword");
+//		Account acct = new Account("w", 1, "12");
+//		acct.addTransaction(new Transaction("transaction", 1, "12"));
+//		acct.addTransaction(new Transaction("transaction 2.0", 1, "12"));
+//		user.addAccount(acct);
+//		user.addAccount(new Account("name", 100, "date"));
+//		user.addAccount(new Account("debit", 200, "11/25/19"));
+//		user1.addAccount(acct);
+//		ArrayList<Users>usr = new ArrayList<Users>();
+//		usr.add(user);
+//		usr.add(user1);
+//		ApplicationFileWriter.writeUserObjects(usr);
+//		ArrayList<Users> users = ApplicationFileWriter.readUserObjects();
+//		users.forEach(userr -> System.out.println(userr));
 	}
 }

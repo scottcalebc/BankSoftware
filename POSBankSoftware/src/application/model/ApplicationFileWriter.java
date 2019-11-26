@@ -1,10 +1,15 @@
 package application.model;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -76,6 +81,48 @@ public class ApplicationFileWriter {
 			writer.write(user.toString());
 		}
 		writer.close();	
+	}
+	
+	public static void writeUserObjects(ArrayList<Users> users) {
+		try {
+			FileOutputStream f = new FileOutputStream(new File("test.dat"));
+			ObjectOutputStream o = new ObjectOutputStream(f);
+			
+			for(Users usr : users) {
+				o.writeObject(usr);
+			}
+			
+			o.close();
+			f.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static ArrayList<Users> readUserObjects() {
+		try {
+			FileInputStream fi = new FileInputStream(new File("test.dat"));
+			ObjectInputStream oi = new ObjectInputStream(fi);
+			
+			while(true) {
+				users.add((Users)oi.readObject());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (EOFException e) {
+			System.out.println("Read all users");
+			return users;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return users;
 	}
 	
 	

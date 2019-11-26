@@ -62,7 +62,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <PieChart labelsVisible="false" layoutX="428.0" layoutY="29.0" legendVisible="false" prefHeight="350.0" prefWidth="350.0" title="Pie Chart" />
+      <PieChart fx:id="piChart" labelsVisible="false" layoutX="428.0" layoutY="29.0" prefHeight="350.0" prefWidth="350.0" title="at a Glance" />
       <Label layoutX="491.0" layoutY="379.0" text="Detail of Accounts at a Glance" />
       <Label layoutX="491.0" layoutY="408.0" text="Money In:" />
       <Label layoutX="568.0" layoutY="408.0" text="\$0.00" />
@@ -70,6 +70,12 @@
       <Label layoutX="582.0" layoutY="436.0" text="-$0.00" />
       <Label layoutX="491.0" layoutY="466.0" text="Net Worth:" />
       <Label layoutX="573.0" layoutY="466.0" text="\$0.00" />
-      <Button layoutX="715.0" layoutY="535.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="addAccountBtn" layoutX="715.0" layoutY="535.0" mnemonicParsing="false" onAction="#addAccount" text="Add" />
+      <RadioButton fx:id="piChartAccounts" layoutX="669.0" layoutY="408.0" mnemonicParsing="false" onAction="#setPiChartAccounts" selected="true" text="Accounts">
+         <toggleGroup>
+            <ToggleGroup fx:id="piChartRadioBtns" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="piChartTransactions" layoutX="669.0" layoutY="436.0" mnemonicParsing="false" onAction="#setPiChartTransactions" text="Transaction" toggleGroup="$piChartRadioBtns" />
    </children>
 </AnchorPane>

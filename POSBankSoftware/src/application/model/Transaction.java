@@ -1,11 +1,13 @@
 package application.model;
 
-public class Transaction implements ShowData {
+import java.io.Serializable;
+
+public class Transaction implements ShowData, Serializable {
 	private String name;
 	private String date;
 	private int amount;
 	
-	public Transaction(String name, String date, int amount) {
+	public Transaction(String name, int amount, String date) {
 		this.name = name;
 		this.date = date;
 		this.amount = amount;
@@ -33,6 +35,14 @@ public class Transaction implements ShowData {
 	public String getTotal() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String getSomeOtherData() {
+		return "";
+	}
+	
+	public String toString() {
+		return name + " " + String.valueOf(amount) + " " + date + "\n";
 	}
 
 }
