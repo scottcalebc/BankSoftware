@@ -1,48 +1,36 @@
-package application.model;
+package Application.models;
 
-import java.io.Serializable;
+public class Transaction {
+    private int transactionNumber;
+    private double transactionValue;
+    private String date;
 
-public class Transaction implements ShowData, Serializable {
-	private String name;
-	private String date;
-	private int amount;
-	
-	public Transaction(String name, int amount, String date) {
-		this.name = name;
-		this.date = date;
-		this.amount = amount;
-	}
-	
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return this.name;
-	}
 
-	@Override
-	public String getDate() {
-		// TODO Auto-generated method stub
-		return this.date;
-	}
+    public Transaction(int transactionNumber) {
+        this.transactionNumber = transactionNumber;
+    }
 
-	@Override
-	public String getAmount() {
-		// TODO Auto-generated method stub
-		return String.valueOf(this.amount);
-	}
+    public double getTransactionValue() {
+        return transactionValue;
+    }
 
-	@Override
-	public String getTotal() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public String getSomeOtherData() {
-		return "";
-	}
-	
-	public String toString() {
-		return name + " " + String.valueOf(amount) + " " + date + "\n";
-	}
+    public void setTransactionValue(double transactionValue) {
+        this.transactionValue = transactionValue;
+    }
 
+    public int getTransactionNumber() {
+        return transactionNumber;
+    }
+
+    public void setTransactionNumber(int transactionNumber) {
+        this.transactionNumber = transactionNumber;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
