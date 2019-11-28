@@ -1,13 +1,21 @@
-package Application.models;
+package application.model;
 
-public class Transaction {
-    private int transactionNumber;
+import java.io.Serializable;
+
+public class Transaction implements ShowData, Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -850213061847820920L;
+	private String name;
     private double transactionValue;
     private String date;
 
 
-    public Transaction(int transactionNumber) {
-        this.transactionNumber = transactionNumber;
+    public Transaction(String name, double transactionValue, String date) {
+        this.name = name;
+    	this.transactionValue = transactionValue;
+        this.date = date;
     }
 
     public double getTransactionValue() {
@@ -18,19 +26,29 @@ public class Transaction {
         this.transactionValue = transactionValue;
     }
 
-    public int getTransactionNumber() {
-        return transactionNumber;
-    }
-
-    public void setTransactionNumber(int transactionNumber) {
-        this.transactionNumber = transactionNumber;
-    }
-
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+    
+    
+    //Interface methods
+    public String getName() {
+    	return this.name;
+    }
+    
+    public String getAmount() {
+    	return String.valueOf(this.transactionValue);
+    }
+    
+    public String getTotal() {
+    	return null;
+    }
+    
+    public double getAmountDouble() {
+    	return this.transactionValue;
     }
 }

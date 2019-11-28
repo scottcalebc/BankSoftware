@@ -1,28 +1,32 @@
-package Application.models;
+package application.model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Accounts {
-    private String accNum;
+public class Accounts implements ShowData, Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8762598452815091385L;
+	private String accName;
     private String accType;
     private double currBalance;
-    private String userID;
+
     //transaction array for transaction object
     private ArrayList<Transaction> transactions;
 
-    public Accounts(String accNum, String accType, double currBalance, String userID){
-        this.accNum = accNum;
+    public Accounts(String accName, String accType, double currBalance, String userID){
+        this.accName = accName;
         this.accType = accType;
         this.currBalance = currBalance;
-        this.userID = userID;
         this.transactions = new ArrayList<Transaction>();
     }
-    public String getAccNum() {
-        return accNum;
+    public String getAccName() {
+        return accName;
     }
-    public void setAccNum(String accNum) {
-        this.accNum = accNum;
+    public void setAccNum(String accName) {
+        this.accName = accName;
     }
     public double getCurrBalance() {
         return currBalance;
@@ -30,12 +34,7 @@ public class Accounts {
     public void setCurrBalance(double currBalance) {
         this.currBalance = currBalance;
     }
-    public String getUserID() {
-        return userID;
-    }
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
+    
     public String getAccType() {
         return accType;
     }
@@ -47,6 +46,63 @@ public class Accounts {
     }
     public void setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
+        
+        for (Transaction tans : transactions) {
+        	this.currBalance += tans.getTransactionValue();
+        }
+    }
+    
+    public void addTransaction(Transaction transaction) {
+    	this.transactions.add(transaction); 
+    	
+    	this.currBalance += transaction.getTransactionValue();
+    }
+    
+    public void removeTransaction(Transaction transaction) {
+    	this.transactions.remove(transaction);
+    }
+    
+    
+    public double getMoneyIn() {
+    	double out = 0;
+    	for (Transaction tans : this.transactions) {
+    		if (tans.getTransactionValue() > 0) 
+    			out += tans.getTransactionValue();
+    	}
+    	
+    	return out;
+    }
+    
+    public double getMoneyOut() {
+    	double out = 0;
+    	for (Transaction tans : this.transactions) {
+    		if (tans.getTransactionValue() < 0) 
+    			out += tans.getTransactionValue();
+    	}
+    	return out;
+    }
+    
+    
+    
+    //Implemented Methods
+    public String getName() {
+    	return this.accName;
+    }
+    
+    public String getAmount() {
+    	return null;
+    }
+    
+    public String getDate() {
+    	return null;
+    }
+    
+    public String getTotal() {
+    	return String.valueOf(this.currBalance);
+    }
+    
+    public double getAmountDouble() {
+    	return this.currBalance;
     }
 
 }

@@ -10,4 +10,6 @@ public interface ShowData {
 	public String getAmount();
 	
 	public String getTotal();
+	
+	public double getAmountDouble();
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="420.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane prefHeight="420.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.TransactionController">
   <!-- TODO Add Nodes -->
   <children>
     <TextField id="Name" fx:id="TransactionName" layoutX="26.0" layoutY="77.0" prefWidth="150.0" />
@@ -33,7 +33,7 @@
       </items>
     </SplitMenuButton>
     <TextArea fx:id="Memo" layoutX="26.0" layoutY="261.0" prefHeight="95.0" prefWidth="350.0" wrapText="true" />
-    <Button fx:id="AddTransaction" layoutX="322.0" layoutY="374.0" mnemonicParsing="false" text="Add" />
+    <Button fx:id="AddTransaction" layoutX="322.0" layoutY="374.0" mnemonicParsing="false" onAction="#addTransaction" text="Add" />
     <Label layoutX="26.0" layoutY="57.0" text="Name" />
     <Label layoutX="224.0" layoutY="57.0" text="Date" />
     <Label layoutX="26.0" layoutY="114.0" text="Amount" />

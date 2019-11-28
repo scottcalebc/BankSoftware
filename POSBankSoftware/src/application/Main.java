@@ -3,36 +3,35 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import application.model.Account;
-import application.model.ApplicationFileWriter;
+import application.controller.MainController;
+import application.model.Accounts;
 import application.model.Transaction;
 import application.model.Users;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 
 public class Main extends Application {
 	
+	MainController mc;
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		Users user = new Users("username", "password");
+		user.addAccount(new Accounts("account 1", "type", 100.0, "11/23/19"));
+		user.addAccount(new Accounts("account 2", "type", 10.0, "11/27/19"));
+		Accounts tmp = new Accounts("account 3", "type", 120.0, "12/1/19");
+		tmp.addTransaction(new Transaction("purchase 1", -20.0, "12/1/19"));
+		user.addAccount(tmp);
+		ArrayList<Users> users = new ArrayList<Users>();
+		users.add(user);
+		this.mc = new MainController(users, primaryStage);
 		
-		ApplicationFileWriter.getUsers();
-		
-		Parent root = FXMLLoader.load(getClass().getResource("view/POSMainTemplate.fxml"));
-		Scene scene = new Scene(root, 800, 600);
-		
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
+		mc.start();
 	}
 	
 	public void stop() {
 		System.out.println("Application closing");
-		System.out.println(ApplicationFileWriter.getState());
-		ApplicationFileWriter.close();
 	}
 	
 	
