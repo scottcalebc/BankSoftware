@@ -104,5 +104,42 @@ public class Accounts implements ShowData, Serializable{
     public double getAmountDouble() {
     	return this.currBalance;
     }
+	@Override
+	public ArrayList<ShowData> getChildren() {
+		// TODO Auto-generated method stub
+		return new ArrayList<ShowData>(this.getTransactions());
+	}
+	@Override
+	public void removeChild(ShowData child) {
+		// TODO Auto-generated method stub
+		if (child instanceof Transaction) {
+			this.removeTransaction((Transaction)child);
+		}
+		
+	}
+	@Override
+	public void addChild(ShowData child) {
+		// TODO Auto-generated method stub
+		if (child instanceof Transaction) {
+			this.addTransaction((Transaction)child);
+		}
+		
+	}
+	@Override
+	public double[] getTotals() {
+		// TODO Auto-generated method stub
+		
+		return new double[] {this.getAmountDouble(), this.getMoneyIn(), this.getMoneyOut()};
+	}
+	
+	
+	public String toString() {
+		String out = this.accName + " " + this.getAmountDouble() + "\n";
+		for(Transaction tans : this.transactions) {
+			out += "    |_____" + tans.toString();
+		}
+		
+		return out;
+	}
 
 }

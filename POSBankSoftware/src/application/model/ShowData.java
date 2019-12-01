@@ -1,15 +1,25 @@
 package application.model;
 
+import java.util.ArrayList;
+
 public interface ShowData {
 
 	
-	public String getName();
+	public abstract String getName();
 	
-	public String getDate();
+	public abstract String getDate();
 	
-	public String getAmount();
+	public abstract String getAmount();
 	
-	public String getTotal();
+	public abstract String getTotal();
 	
-	public double getAmountDouble();
+	public abstract double getAmountDouble();
+	
+	public abstract ArrayList<ShowData> getChildren();
+	
+	public abstract void removeChild(ShowData child);
+	
+	public abstract void addChild(ShowData child);
+	
+	public abstract double[] getTotals();
 }

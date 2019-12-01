@@ -1,6 +1,7 @@
 package application.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Transaction implements ShowData, Serializable{
     /**
@@ -51,4 +52,33 @@ public class Transaction implements ShowData, Serializable{
     public double getAmountDouble() {
     	return this.transactionValue;
     }
+
+	@Override
+	public ArrayList<ShowData> getChildren() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeChild(ShowData child) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addChild(ShowData child) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double[] getTotals() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	public String toString() {
+		return this.name + " " + this.getAmountDouble() + "\n";
+	}
 }

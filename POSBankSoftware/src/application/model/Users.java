@@ -80,6 +80,52 @@ public class Users implements Serializable, ShowData {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	@Override
+	public ArrayList<ShowData> getChildren() {
+		// TODO Auto-generated method stub
+		return new ArrayList<ShowData>(this.accounts);
+	}
+
+
+	@Override
+	public void removeChild(ShowData child) {
+		
+		if (child instanceof Accounts) {
+			System.out.println("Removing child " + child);
+			this.removeAccount((Accounts)child);
+		}
+		
+	}
+
+
+	@Override
+	public void addChild(ShowData child) {
+		if (child instanceof Accounts) {
+			this.addAccount((Accounts)child);
+		}
+	}
+
+
+	@Override
+	public double[] getTotals() {
+		// TODO Auto-generated method stub
+		double total = this.accounts.stream().mapToDouble(x -> x.getCurrBalance()).sum();
+		double out = this.accounts.stream().mapToDouble(x -> x.getMoneyOut()).sum();
+		double in = this.accounts.stream().mapToDouble(x -> x.getMoneyIn()).sum();
+		return new double[]{total, in, out};
+	}
+	
+	
+	public String toString() {
+		String out = this.name + "\n";
+		for(Accounts act : this.accounts) {
+			out += "  |____" + act.toString();
+		}
+		
+		return out;
+	}
     
 
 }

@@ -68,6 +68,8 @@ public class POSViewController implements Initializable, SubController {
 	
 	private Users user;
 	
+	private ShowData data;
+	
 	private Accounts rootnode;
 	
 	
@@ -84,52 +86,34 @@ public class POSViewController implements Initializable, SubController {
 			return;
 		}
 		
-		System.out.println(selectionModel);
+		
 		int rowIndex = selectionModel.getSelectedIndex();
 		TreeItem<ShowData> data = selectionModel.getModelItem(rowIndex);
 		TreeItem<ShowData> parent = data.getParent();
 		
-		Object parentvalue = parent.getValue();
+		ShowData par = parent.getValue();
+		ShowData obj = data.getValue();
 		
-		if (parentvalue instanceof Accounts) {
-			Accounts pacct = ((Accounts)parentvalue);
-			if (!pacct.getName().equals("rootnode")) {
-				Accounts tmp = user.getAccounts().stream().filter(x -> x.equals(pacct)).findFirst().get();
-				System.out.println(tmp.getTransactions());
-				Transaction tmptran = (Transaction)data.getValue();
-				pacct.removeTransaction(tmptran);
-				parent.getChildren().remove(data);
-				
-				if (piChartTransactions.isSelected()) 
-					setPiChartTransactions(new ActionEvent());
-				
-				
-				System.out.println(tmp.getTransactions());
-			} else {
-				System.out.println("Must remove from user arraylist acct");
-				user.removeAccount((Accounts)data.getValue());
-				parent.getChildren().remove(data);
-				
-				if (piChartAccounts.isSelected()) 
-					setPiChartAccounts(new ActionEvent());
-			}
-		}
+		System.out.println(par);
 		
+		par.removeChild(obj);
+		parent.getChildren().remove(data);
 		updateAmounts();
 		
+		System.out.println(this.data);
 	}
 	
 	public void setPiChartTransactions(ActionEvent event) {
 		ArrayList<ShowData> data = new ArrayList<ShowData>();
-		for(Accounts acct : user.getAccounts()) {
-			data.addAll(acct.getTransactions());
+		for(ShowData sub : this.data.getChildren()) {
+			data.addAll(sub.getChildren());
 		}
 		setPieChart(data);
 		
 	}
 	
 	public void setPiChartAccounts(ActionEvent event) {
-		setPieChart(new ArrayList<ShowData>(this.user.getAccounts()));
+		setPieChart(this.data.getChildren());
 	}
 	
 	public void addAccount(ActionEvent event) {
@@ -154,42 +138,50 @@ public class POSViewController implements Initializable, SubController {
 	}
 	
 	private void updateAmounts() {
-
-		double total = 0;
-		double moneyIn = 0;
-		double moneyOut = 0;
-		for(Accounts acct : user.getAccounts()) {
-			total += acct.getCurrBalance();
-			moneyIn += acct.getMoneyIn();
-			moneyOut += acct.getMoneyOut();
+		double amounts[] = data.getTotals();
+		System.out.println(amounts[0] + " " + amounts[1] + " " + amounts[2]);
+		setAmounts(amounts[0], amounts[1], amounts[2]);
+	}
+	
+	public TreeItem<ShowData> buildTree(ShowData data) {
+		if (data.getChildren() == null) {
+			return new TreeItem<>(data);
+		} else {
+			TreeItem<ShowData>par = new TreeItem<>(data);
+			for (ShowData sub : data.getChildren()) {
+				par.getChildren().add(buildTree(sub));
+			}
+			
+			return par;
 		}
-		
-		setAmounts(total, moneyIn, moneyOut);
-		
 	}
 	
 	public void onLoad(ShowData data, MainController mc) {
 		this.mc = mc;
+		this.data = data;
+		System.out.println(data);
 		setCellFactory();
 		this.rootnode = new Accounts("rootnode", "rootnode", 0, "rootnode");
 		TreeItem<ShowData> root = new TreeItem<>(this.rootnode);
 		
-		if (data instanceof Users) {
-			this.user = (Users)data;
-			for (Accounts accnt : this.user.getAccounts()) {
-				TreeItem<ShowData>acctnode = new TreeItem<>(accnt);
-				for(Transaction tans : accnt.getTransactions()) {
-					TreeItem<ShowData>tansnode = new TreeItem<>(tans);
-					acctnode.getChildren().add(tansnode);
-				}
-				root.getChildren().add(acctnode);
-			}
-		} else if (data instanceof Accounts) {
-			System.out.println(this.user);
-		}
+		TreeItem<ShowData>parent = buildTree(data);
+		parent.setExpanded(false);
+		AccountTable.setRoot(parent);
+//		
+//		
+//		if (data instanceof Users) {
+//			this.user = (Users)data;
+//			for (ShowData subData : data.getChildren()) {
+//				TreeItem<ShowData>acctnode = new TreeItem<>(subData);
+//				
+//				root.getChildren().add(acctnode);
+//			}
+//		} else if (data instanceof Accounts) {
+//			System.out.println(this.user);
+//		}
 		
-		root.setExpanded(true);
-		AccountTable.setRoot(root);
+//		root.setExpanded(true);
+//		AccountTable.setRoot(root);
 		
 		AccountTable.widthProperty().addListener(new ChangeListener<Number>() {
 	        @Override
@@ -208,14 +200,14 @@ public class POSViewController implements Initializable, SubController {
 		
 		
 		//Pie Char Data
-		setPieChart(new ArrayList<ShowData>(user.getAccounts()));
+		setPieChart(data.getChildren());
 		
 		
 		updateAmounts();
 	}
 	
 	public ShowData onExit() {
-		return this.user;
+		return this.data;
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
@@ -224,8 +216,8 @@ public class POSViewController implements Initializable, SubController {
 		
 	}
 	
-	public void addPieChart(Accounts acct) {
-	    piChart.getData().add(new PieChart.Data(acct.getName(), Math.abs(acct.getAmountDouble())));
+	public void addPieChart(ShowData data) {
+	    piChart.getData().add(new PieChart.Data(data.getName(), Math.abs(data.getAmountDouble())));
 	  }
 	
 	public void setPieChart(ArrayList<ShowData> data) {
