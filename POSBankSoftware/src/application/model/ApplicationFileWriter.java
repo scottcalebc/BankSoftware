@@ -1,18 +1,14 @@
 package application.model;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.BufferedWriter;
-import java.io.EOFException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class ApplicationFileWriter {
 	
@@ -24,7 +20,7 @@ public class ApplicationFileWriter {
 	
 	public static void writeUserObjects(ArrayList<Users> users) {
 		try {
-			FileOutputStream f = new FileOutputStream(new File("test.dat"));
+			FileOutputStream f = new FileOutputStream(new File(dataFile));
 			ObjectOutputStream o = new ObjectOutputStream(f);
 			
 			o.writeObject(users);
@@ -32,7 +28,6 @@ public class ApplicationFileWriter {
 			o.close();
 			f.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -40,6 +35,7 @@ public class ApplicationFileWriter {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static ArrayList<Users> readUserObjects() {
 		ObjectInputStream oi;
 		FileInputStream fi;
@@ -55,7 +51,7 @@ public class ApplicationFileWriter {
 			
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			return new ArrayList<Users>();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (EOFException e) {
@@ -66,11 +62,5 @@ public class ApplicationFileWriter {
 		
 		return users;
 	}
-	
-	
-	public static void close() {
-		
-	}
-	
 	
 }

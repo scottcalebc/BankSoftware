@@ -3,10 +3,7 @@ package application.controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import application.model.Accounts;
 import application.model.ShowData;
-import application.model.Transaction;
-import application.model.Users;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,64 +25,43 @@ import javafx.scene.layout.Pane;
 
 public class POSViewController implements Initializable, SubController {
 	
-	MainController mc;
+	private MainController mc;	
+	
+	private ShowData data;
+	
 	
 	@FXML
 	private TreeTableView<ShowData> AccountTable;
 	
 	@FXML
-	private TreeTableColumn<ShowData, String> AccountColumn;
-	
-	@FXML
-	private TreeTableColumn<ShowData, String> DateColumn;
-	
-	@FXML
-	private TreeTableColumn<ShowData, String> AmountColumn;
-	
-	@FXML
-	private TreeTableColumn<ShowData, String> TotalColumn;
+	private TreeTableColumn<ShowData, String> AccountColumn, DateColumn, AmountColumn, TotalColumn;
 	
 	@FXML
 	private PieChart piChart;
 	
 	@FXML
-	private Button addAccountBtn;
-	
-	@FXML
-	private RadioButton piChartTransactions;
-	
-	@FXML
-	private RadioButton piChartAccounts;
+	private RadioButton piChartTransactions, piChartAccounts;
 	
 	@FXML 
 	private ToggleGroup piChartRadioBtns;
 	
 	@FXML
-	private Button DeleteTreeItemBtn, addTransactionBtn;
+	private Button DeleteTreeItemBtn, addTransactionBtn, addAccountBtn;
 	
 	@FXML
 	private Label totalAmount, totalAmountpiChart, lblMoneyIn, lblMoneyOut;
-	
-	private Users user;
-	
-	private ShowData data;
-	
-	private Accounts rootnode;
-	
+
 	
 	public void addTransaction(ActionEvent event) {
 		mc.updateView(this, MainController.addTanView, MainController.addTanX, MainController.addTanY);
 	}
 	
 	public void DeleteTreeItem(ActionEvent event) {
-		System.out.println("Delete Button Pressed");
 		TreeTableViewSelectionModel<ShowData> selectionModel = AccountTable.getSelectionModel();
 		
 		if (selectionModel.isEmpty()) {
-			System.out.println("Nothing to delete.");
 			return;
 		}
-		
 		
 		int rowIndex = selectionModel.getSelectedIndex();
 		TreeItem<ShowData> data = selectionModel.getModelItem(rowIndex);
@@ -99,6 +75,7 @@ public class POSViewController implements Initializable, SubController {
 		par.removeChild(obj);
 		parent.getChildren().remove(data);
 		updateAmounts();
+		piChart.getData().removeIf(x -> x.getName().equals(obj.getName()));
 		
 		System.out.println(this.data);
 	}
@@ -161,27 +138,10 @@ public class POSViewController implements Initializable, SubController {
 		this.data = data;
 		System.out.println(data);
 		setCellFactory();
-		this.rootnode = new Accounts("rootnode", "rootnode", 0, "rootnode");
-		TreeItem<ShowData> root = new TreeItem<>(this.rootnode);
 		
 		TreeItem<ShowData>parent = buildTree(data);
 		parent.setExpanded(false);
 		AccountTable.setRoot(parent);
-//		
-//		
-//		if (data instanceof Users) {
-//			this.user = (Users)data;
-//			for (ShowData subData : data.getChildren()) {
-//				TreeItem<ShowData>acctnode = new TreeItem<>(subData);
-//				
-//				root.getChildren().add(acctnode);
-//			}
-//		} else if (data instanceof Accounts) {
-//			System.out.println(this.user);
-//		}
-		
-//		root.setExpanded(true);
-//		AccountTable.setRoot(root);
 		
 		AccountTable.widthProperty().addListener(new ChangeListener<Number>() {
 	        @Override
@@ -198,11 +158,8 @@ public class POSViewController implements Initializable, SubController {
 	        }
 	    });
 		
-		
 		//Pie Char Data
 		setPieChart(data.getChildren());
-		
-		
 		updateAmounts();
 	}
 	
@@ -211,8 +168,6 @@ public class POSViewController implements Initializable, SubController {
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		//TreeTableView Data
-		
 		
 	}
 	

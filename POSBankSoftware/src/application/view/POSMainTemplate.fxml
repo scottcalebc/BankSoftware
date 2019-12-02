@@ -19,7 +19,7 @@
           <AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" SplitPane.resizableWithParent="false">
                <children>
                   <Button fx:id="addTransactionBtn" layoutX="331.0" layoutY="7.0" mnemonicParsing="false" onAction="#addTransaction" prefWidth="55.0" text="Add" />
-                  <Button layoutX="200.0" layoutY="7.0" mnemonicParsing="false" text="Import" />
+                  <Button layoutX="200.0" layoutY="7.0" mnemonicParsing="false" text="Edit" visible="false" />
                   <Label layoutX="14.0" layoutY="12.0" text="Transaction List By Account" />
                   <Button fx:id="DeleteTreeItemBtn" layoutX="266.0" layoutY="7.0" mnemonicParsing="false" onAction="#DeleteTreeItem" text="Delete" />
                </children>
