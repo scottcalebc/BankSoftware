@@ -131,7 +131,7 @@ public class POSViewController implements Initializable, SubController {
 	}
 	
 	private void setAmounts(double total, double moneyIn, double moneyOut) {
-		totalAmount.setText("$" + String.valueOf(total));
+		totalAmount.setText(String.format("$%.2f", total));
 		totalAmountpiChart.setText("$" + String.valueOf(total));
 		lblMoneyIn.setText("$" + String.valueOf(moneyIn));
 		lblMoneyOut.setText("-$" + String.valueOf(Math.abs(moneyOut)));

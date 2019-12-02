@@ -53,7 +53,7 @@ public class AccountController  implements Initializable, SubController {
 			mc.updateView(this, MainController.mainView, MainController.mainX, MainController.mainY);
 		} else {
 			this.user = (Users)data;
-		}
+		}	
 		
 		NewBalance.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent key) {
