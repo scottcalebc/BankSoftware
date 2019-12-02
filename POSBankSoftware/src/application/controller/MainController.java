@@ -64,7 +64,7 @@ public class MainController {
 			this.currUser = this.users.get(0);
 			sc.onLoad(this.currUser, this);
 			
-			
+			scene.getStylesheets().add("application/application.css");
 			
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
