@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.POSViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.POSViewController">
    <children>
       <SplitPane dividerPositions="0.075, 0.15, 0.925" layoutX="10.0" layoutY="9.0" orientation="VERTICAL" prefHeight="575.0" prefWidth="400.0">
         <items>
           <AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Button fx:id="addTransactionBtn" layoutX="331.0" layoutY="7.0" mnemonicParsing="false" onAction="#addTransaction" prefWidth="55.0" text="Add" />
-                  <Button layoutX="200.0" layoutY="7.0" mnemonicParsing="false" text="Import" />
+                  <Button fx:id="addTransactionBtn" layoutX="345.0" mnemonicParsing="false" onAction="#addTransaction" prefHeight="40.0" prefWidth="55.0" text="Add" />
+                  <Button layoutX="215.0" mnemonicParsing="false" prefHeight="40.0" text="Import" />
                   <Label layoutX="14.0" layoutY="12.0" text="Transaction List By Account" />
-                  <Button fx:id="DeleteTreeItemBtn" layoutX="266.0" layoutY="7.0" mnemonicParsing="false" onAction="#DeleteTreeItem" text="Delete" />
+                  <Button fx:id="DeleteTreeItemBtn" layoutX="282.0" mnemonicParsing="false" onAction="#DeleteTreeItem" prefHeight="40.0" text="Delete" />
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="400.0" SplitPane.resizableWithParent="false">
@@ -45,7 +44,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                <children>
-                  <TreeTableView fx:id="AccountTable" prefHeight="436.0" prefWidth="398.0" showRoot="false">
+                  <TreeTableView fx:id="AccountTable" prefHeight="436.0" prefWidth="400.0" showRoot="false">
                     <columns>
                       <TreeTableColumn fx:id="AccountColumn" minWidth="50.0" prefWidth="232.0" text="Account" />
                       <TreeTableColumn fx:id="DateColumn" minWidth="0.0" prefWidth="65.0" text="Date" />
@@ -56,9 +55,9 @@
                </children></AnchorPane>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="400.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Label layoutX="33.0" layoutY="9.0" text="Net" />
+                  <Label layoutX="28.0" layoutY="12.0" text="Net" />
                   <Label layoutX="134.0" layoutY="9.0" prefWidth="250.0" textAlignment="RIGHT" />
-                  <Label fx:id="totalAmount" layoutX="349.0" layoutY="9.0" text="\$0.00" />
+                  <Label fx:id="totalAmount" layoutX="348.0" layoutY="12.0" text="\$0.00" />
                </children>
             </AnchorPane>
         </items>
@@ -71,7 +70,7 @@
       <Label fx:id="lblMoneyOut" layoutX="582.0" layoutY="436.0" text="-$0.00" />
       <Label layoutX="491.0" layoutY="466.0" text="Net Worth:" />
       <Label fx:id="totalAmountpiChart" layoutX="573.0" layoutY="466.0" text="\$0.00" />
-      <Button fx:id="addAccountBtn" layoutX="715.0" layoutY="535.0" mnemonicParsing="false" onAction="#addAccount" text="Add" />
+      <Button fx:id="addAccountBtn" layoutX="559.0" layoutY="538.0" mnemonicParsing="false" onAction="#addAccount" text="Add Transaction" />
       <RadioButton fx:id="piChartAccounts" layoutX="669.0" layoutY="408.0" mnemonicParsing="false" onAction="#setPiChartAccounts" selected="true" text="Accounts">
          <toggleGroup>
             <ToggleGroup fx:id="piChartRadioBtns" />
