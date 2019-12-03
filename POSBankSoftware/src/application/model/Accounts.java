@@ -1,13 +1,10 @@
 package application.model;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Accounts implements ShowData, Serializable{
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = -8762598452815091385L;
 	private String accName;
     private String accType;
@@ -82,8 +79,6 @@ public class Accounts implements ShowData, Serializable{
     	return out;
     }
     
-    
-    
     //Implemented Methods
     public String getName() {
     	return this.accName;
@@ -114,8 +109,6 @@ public class Accounts implements ShowData, Serializable{
 		// TODO Auto-generated method stub
 		if (child instanceof Transaction) {
 			this.removeTransaction((Transaction)child);
-			
-			this.currBalance += (child.getAmountDouble() * -1);
 		}
 		
 	}

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="250.0" prefWidth="400.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AccountController">
+<AnchorPane prefHeight="225.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AccountController">
   <!-- TODO Add Nodes -->
   <children>
     <Label layoutX="129.0" layoutY="14.0" text="Add an Account">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <TextField fx:id="NewName" layoutX="22.0" layoutY="91.0" prefWidth="150.0" />
+      <TextField fx:id="NewName" layoutX="22.0" layoutY="88.0" prefWidth="150.0" />
       <TextField fx:id="NewBalance" layoutX="224.0" layoutY="88.0" prefWidth="150.0" />
-      <Label layoutX="22.0" layoutY="70.0" text="Name" />
+      <Label layoutX="22.0" layoutY="67.0" text="Name" />
       <Label layoutX="224.0" layoutY="67.0" text="Current Balance" />
-      <Button fx:id="AddAccount" layoutX="249.0" layoutY="183.0" mnemonicParsing="false" prefWidth="100.0" text="Add" />
+      <Button fx:id="AddAccount" layoutX="286.0" layoutY="180.0" mnemonicParsing="false" prefWidth="100.0" text="Add" />
+      <Button fx:id="cancelAccount" layoutX="174.0" layoutY="180.0" mnemonicParsing="false" prefWidth="100.0" text="Cancel" />
   </children>
 </AnchorPane>

@@ -7,11 +7,11 @@ import java.util.ResourceBundle;
 import application.model.ShowData;
 import application.model.Users;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class LoginScreenController implements Initializable, SubController {
 	
@@ -20,28 +20,38 @@ public class LoginScreenController implements Initializable, SubController {
 	Users user;
 	
 	@FXML
-	private Button Login;
+	private Button Login, AddNewUser;
 	
 	@FXML
 	private TextField LoginId, LoginPassword;
-	
+		
 	@FXML
-	private Button AddNewUser;
+	private Label invalidUserInfo;
 	
+	public void newUserClick() {
+		mc.updateView(null, MainController.addUserView, MainController.addUserX, MainController.addUserY);
+	}
 	
 	public void attemptLogin(ActionEvent event) {
+		if (LoginId.getText() == null || LoginId.getText().contentEquals("")) {
+			LoginId.requestFocus();
+			return;
+		}
 		Users tmp = null;
 		try {
 			tmp = mc.getUsers().stream().filter(x -> x.getName().equals(LoginId.getText())).findFirst().get();
 		} catch(NoSuchElementException e) {
-			//produce login error on screen 
+			invalidUserInfo.setVisible(true);
 			return;
 		}
 		if (tmp != null) {
 			if (tmp.getPassword().equals(LoginPassword.getText())) {
 				this.user = tmp;
 				mc.updateView(this, MainController.mainView, MainController.mainX, MainController.mainY);
-			} 
+			}
+			else {
+				invalidUserInfo.setVisible(true);
+			}
 		}
 		
 		LoginId.requestFocus();
@@ -50,31 +60,16 @@ public class LoginScreenController implements Initializable, SubController {
 
 	@Override
 	public void onLoad(ShowData data, MainController mc) {
-		// TODO Auto-generated method stub
 		this.mc = mc;
-		
-		
-		AddNewUser.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				mc.updateView(null, MainController.addUserView, MainController.addUserX, MainController.addUserY);
-			}
-			
-		});
-		
 	}
 
 	@Override
 	public ShowData onExit() {
-		// TODO Auto-generated method stub
 		return this.user;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
 	}
 

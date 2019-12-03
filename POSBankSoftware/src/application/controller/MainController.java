@@ -41,7 +41,7 @@ public class MainController {
 	//Add User Screen View
 	public static final String addUserView = "../view/AddUser.fxml";
 	public static final int addUserX = 475;
-	public static final int addUserY = 325;
+	public static final int addUserY = 180;
 	
 	
 	public MainController(ArrayList<Users>users, Stage primaryStage) {
@@ -72,7 +72,6 @@ public class MainController {
 	
 	public void start() {
 		System.out.println("Main Controlelr started");
-<<<<<<< HEAD
 		this.updateView(null, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
 //		try {
 //			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/POSMainTemplate.fxml"));
@@ -91,26 +90,6 @@ public class MainController {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-=======
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/POSMainTemplate.fxml"));
-			Parent root = loader.load();
-			Scene scene = new Scene(root, 800, 600);
-			
-			POSViewController sc = loader.<POSViewController>getController();
-			this.currUser = this.users.get(0);
-			sc.onLoad(this.currUser, this);
-			
-			scene.getStylesheets().add("application/application.css");
-			
-			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
-			primaryStage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
->>>>>>> b1dec52e0571b927595c3ecece0353b2cdbe4477
 	}
 	
 	public void updateView(SubController sc, String filetoOpen, int sizeX, int sizeY) {

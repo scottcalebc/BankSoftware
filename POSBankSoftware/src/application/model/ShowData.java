@@ -3,7 +3,6 @@ package application.model;
 import java.util.ArrayList;
 
 public interface ShowData {
-
 	
 	public abstract String getName();
 	

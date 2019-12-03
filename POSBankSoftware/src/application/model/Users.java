@@ -5,9 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Users implements Serializable, ShowData {
-        /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5455019132955405860L;
 	private String name;
     private ArrayList<Accounts> accounts;
@@ -18,13 +16,11 @@ public class Users implements Serializable, ShowData {
         this.password = password;
         this.accounts = new ArrayList<Accounts>();
     }
-
-
-    public String getNamFirst() { return name; }
     
     public void setName(String name) {
         this.name = name;
     }
+    
     public String getName() {
         return name;
     }
@@ -119,7 +115,7 @@ public class Users implements Serializable, ShowData {
 	
 	
 	public String toString() {
-		String out = this.name + "\n";
+		String out = this.name + " " + this.password + "\n";
 		for(Accounts act : this.accounts) {
 			out += "  |____" + act.toString();
 		}

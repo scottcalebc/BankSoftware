@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="600.0" prefWidth="800.0" stylesheets="@../application.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginScreenController">
    <children>
       <Label layoutX="371.0" layoutY="178.0" text="Login">
          <font>
@@ -22,11 +22,12 @@
       <PasswordField fx:id="LoginPassword" layoutX="307.0" layoutY="300.0" promptText="Password" />
       <Button fx:id="Login" layoutX="369.0" layoutY="369.0" mnemonicParsing="false" onAction="#attemptLogin" text="Login!" />
       <Label layoutX="365.0" layoutY="474.0" text="New User?" />
-      <Button fx:id="AddNewUser" layoutX="355.0" layoutY="507.0" mnemonicParsing="false" text="Click Here!" />
+      <Button fx:id="AddNewUser" layoutX="355.0" layoutY="507.0" mnemonicParsing="false" onAction="#newUserClick" text="Click Here!" />
       <Label layoutX="53.0" layoutY="62.0" text="Plain, Ordinary, and Simple Banking Software">
          <font>
             <Font size="35.0" />
          </font>
       </Label>
+      <Label fx:id="invalidUserInfo" layoutX="313.0" layoutY="340.0" text="*Invalid User ID/Password!" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

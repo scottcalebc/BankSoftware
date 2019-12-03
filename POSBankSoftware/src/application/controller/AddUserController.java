@@ -6,51 +6,60 @@ import java.util.ResourceBundle;
 import application.model.ShowData;
 import application.model.Users;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+
 
 public class AddUserController implements Initializable, SubController{
 	MainController mc;
-	Users user;
-	
-	//FXML TEXT Fields
+	Users newUser;
 	
 	@FXML
-	private Button SubmitNewAccount, Cancel;
+	private TextField userNameNewUser;
 	
+	@FXML
+	private Button submitNewUser, cancelNewUser;
 	
+	@FXML
+	private PasswordField passwordNewUser;
 	
-	
+	@FXML
+	private Label invalidUser;
 	
 	//FXML Event Hanlder for validating fields and adding user
 	public void addUser(ActionEvent event) {
-		mc.updateView(null, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
+		for (Users currUser : mc.getUsers()) {
+			if (userNameNewUser.getText().equals(currUser.getName())) {
+				invalidUser.setVisible(true);
+				userNameNewUser.requestFocus();
+				return;
+			}
+		}
+		this.newUser = new Users(userNameNewUser.getText(), passwordNewUser.getText());
+		mc.addUser(this.newUser);
+		mc.updateView(this, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
 	}
 	
+	public void cancelUser(ActionEvent e) {
+		mc.updateView(null, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
+	}
 
 	@Override
 	public void onLoad(ShowData data, MainController mc) {
-		// TODO Auto-generated method stub
 		this.mc = mc;
-		
-		this.Cancel.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				mc.updateView(null, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
-			}
-		});
 	}
 
 	@Override
 	public ShowData onExit() {
-		// TODO Auto-generated method stub
-		return user;
+		return this.newUser;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
 	}
 
