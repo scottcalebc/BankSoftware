@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="325.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AddUserController">
+
+<fx:root prefHeight="325.0" prefWidth="475.0" stylesheets="@../application.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AddUserController">
    <children>
       <Label layoutX="160.0" layoutY="14.0" text="Create New Account">
          <font>

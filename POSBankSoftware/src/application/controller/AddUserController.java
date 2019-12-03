@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import application.model.ShowData;
 import application.model.Users;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class AddUserController implements Initializable, SubController{
 	//FXML TEXT Fields
 	
 	@FXML
-	private Button SubmitNewAccount;
+	private Button SubmitNewAccount, Cancel;
 	
 	
 	
@@ -33,6 +34,12 @@ public class AddUserController implements Initializable, SubController{
 	public void onLoad(ShowData data, MainController mc) {
 		// TODO Auto-generated method stub
 		this.mc = mc;
+		
+		this.Cancel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mc.updateView(null, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
+			}
+		});
 	}
 
 	@Override

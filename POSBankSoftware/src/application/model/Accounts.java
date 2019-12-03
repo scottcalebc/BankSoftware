@@ -114,6 +114,8 @@ public class Accounts implements ShowData, Serializable{
 		// TODO Auto-generated method stub
 		if (child instanceof Transaction) {
 			this.removeTransaction((Transaction)child);
+			
+			this.currBalance += (child.getAmountDouble() * -1);
 		}
 		
 	}
