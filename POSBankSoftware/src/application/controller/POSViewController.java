@@ -4,11 +4,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import application.model.ShowData;
+import application.model.Users;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
@@ -46,10 +48,47 @@ public class POSViewController implements Initializable, SubController {
 	private ToggleGroup piChartRadioBtns;
 	
 	@FXML
-	private Button DeleteTreeItemBtn, addTransactionBtn, addAccountBtn;
+	private Button DeleteTreeItemBtn, addTransactionBtn, addAccountBtn, logoutBtn, editBtn;
 	
 	@FXML
 	private Label totalAmount, totalAmountpiChart, lblMoneyIn, lblMoneyOut;
+	
+	
+	public void editShowData(ActionEvent event) {
+		TreeTableViewSelectionModel<ShowData> selectionModel = AccountTable.getSelectionModel();
+		
+		if (selectionModel.isEmpty()) {
+			return;
+		}
+		
+		int rowIndex = selectionModel.getSelectedIndex();
+		TreeItem<ShowData> data = selectionModel.getModelItem(rowIndex);
+		TreeItem<ShowData> parent = data.getParent();
+		
+		mc.setCurrUser((Users)this.data);
+		if (parent.getValue() == this.data) {
+			
+			mc.updateView(new SubController() {
+				public void onLoad(ShowData data, MainController mc) {
+					
+				}
+				
+				public ShowData onExit() {
+					return data.getValue();
+				}
+			}, MainController.addAcctView, MainController.addAcctX, MainController.addAcctY);
+		} else {
+			mc.updateView(new SubController() {
+				public void onLoad(ShowData data, MainController mc) {
+					
+				}
+				
+				public ShowData onExit() {
+					return data.getValue();
+				}
+			}, MainController.addTanView, MainController.addTanX, MainController.addTanY);
+		}
+	}
 
 	
 	public void addTransaction(ActionEvent event) {
@@ -70,14 +109,10 @@ public class POSViewController implements Initializable, SubController {
 		ShowData par = parent.getValue();
 		ShowData obj = data.getValue();
 		
-		System.out.println(par);
-		
 		par.removeChild(obj);
 		parent.getChildren().remove(data);
 		updateAmounts();
 		piChart.getData().removeIf(x -> x.getName().equals(obj.getName()));
-		
-		System.out.println(this.data);
 	}
 	
 	public void setPiChartTransactions(ActionEvent event) {
@@ -109,14 +144,13 @@ public class POSViewController implements Initializable, SubController {
 	
 	private void setAmounts(double total, double moneyIn, double moneyOut) {
 		totalAmount.setText(String.format("$%.2f", total));
-		totalAmountpiChart.setText("$" + String.valueOf(total));
-		lblMoneyIn.setText("$" + String.valueOf(moneyIn));
-		lblMoneyOut.setText("-$" + String.valueOf(Math.abs(moneyOut)));
+		totalAmountpiChart.setText(String.format("$%.2f", total));
+		lblMoneyIn.setText(String.format("$%.2f", moneyIn));
+		lblMoneyOut.setText(String.format("0$%.2f", Math.abs(moneyOut)));
 	}
 	
 	private void updateAmounts() {
 		double amounts[] = data.getTotals();
-		System.out.println(amounts[0] + " " + amounts[1] + " " + amounts[2]);
 		setAmounts(amounts[0], amounts[1], amounts[2]);
 	}
 	
@@ -136,7 +170,6 @@ public class POSViewController implements Initializable, SubController {
 	public void onLoad(ShowData data, MainController mc) {
 		this.mc = mc;
 		this.data = data;
-		System.out.println(data);
 		setCellFactory();
 		
 		TreeItem<ShowData>parent = buildTree(data);
@@ -157,6 +190,12 @@ public class POSViewController implements Initializable, SubController {
 	            }
 	        }
 	    });
+		
+		logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mc.updateView(null, MainController.loginScreenView, MainController.loginScreenX, MainController.loginScreenY);
+			}
+		});
 		
 		//Pie Char Data
 		setPieChart(data.getChildren());

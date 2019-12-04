@@ -40,9 +40,12 @@ public class Transaction implements ShowData, Serializable{
     public String getName() {
     	return this.name;
     }
+    public void setName(String name) {
+    	this.name = name;
+    }
     
     public String getAmount() {
-    	return String.valueOf(this.transactionValue);
+    	return String.format("%.2f", this.transactionValue);
     }
     
     public String getTotal() {

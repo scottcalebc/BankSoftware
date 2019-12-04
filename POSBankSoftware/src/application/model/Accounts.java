@@ -57,6 +57,8 @@ public class Accounts implements ShowData, Serializable{
     
     public void removeTransaction(Transaction transaction) {
     	this.transactions.remove(transaction);
+    	
+    	this.currBalance -= transaction.getTransactionValue();
     }
     
     
@@ -93,7 +95,7 @@ public class Accounts implements ShowData, Serializable{
     }
     
     public String getTotal() {
-    	return String.valueOf(this.currBalance);
+    	return String.format("%.2f", this.currBalance);
     }
     
     public double getAmountDouble() {

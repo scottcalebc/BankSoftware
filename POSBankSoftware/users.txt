@@ -1,2 +1,0 @@
-0,someone new,password
-1,someone,password
