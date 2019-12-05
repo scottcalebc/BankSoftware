@@ -1,8 +1,8 @@
 # Plain Ordinary and Simple Banking Software
-A simple application to track personal accounts and purchases aggregating these into a clean graphical format breaking down flow of money to make better finacial decisions for your future
+A simple application to track personal accounts and purchases aggregating these into a clean graphical format breaking down flow of money to make better finacial decisions for your future.
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Will need eclipse to build and run project
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Eclipse is needed to build and run project.
 
 
 
@@ -25,6 +25,17 @@ Select finish
 
 Simply Run Project from Eclipse to load application
 
+## Testing
+
+This is a test account pre-loaded with *username*:username *password*:password logging in with these credentials shows example accounts and transactions to edit or delete or add new ones.
+
+## Examples
+This shows the main view with the test accounts
+![Account](example1.png)
+
+This shows the main view with the test transactions
+![Transaction](example2.png)
+
 ### Features
 * Create User(s)
 * Add/Edit/Delete Accounts
@@ -40,4 +51,4 @@ Simply Run Project from Eclipse to load application
 * Nikki Thanapaisal
 * Jonathan Becker
 * Luke DeGoes
-* Brenna Blusk
+* Brenna Lusk
