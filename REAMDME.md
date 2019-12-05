@@ -30,7 +30,7 @@ Simply Run Project from Eclipse to load application
 This is a test account pre-loaded with *username*:username *password*:password logging in with these credentials shows example accounts and transactions to edit or delete or add new ones.
 
 - To Edit an Account or Transaction
-Select the Account or Transaction from the table on the left and press the Edit Button
+: Select the Account or Transaction from the table on the left and press the Edit Button
 
 - to Delete an Account or Transaction
 Select the Account or Transaction from the table on the left and press the Delete Button
