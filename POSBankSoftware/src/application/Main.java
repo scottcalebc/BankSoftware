@@ -8,29 +8,41 @@ import application.model.Users;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
+/**
+ * Main method of application
+ * @author Chrisotpher Caleb Scott
+ *
+ */
 public class Main extends Application {
 	
+	/**
+	 * Main controller reference
+	 */
 	MainController mc;
 	
 	@Override
+	/**
+	 * Used to instantiate controller and pass in data from object file
+	 */
 	public void start(Stage primaryStage) throws IOException {
 		ArrayList<Users> users = ApplicationFileWriter.readUserObjects();
-		
-		System.out.println(users);
 		
 		this.mc = new MainController(users, primaryStage);
 		
 		mc.start();
 	}
 	
+	/**
+	 * Used to write to data file any new objects/updated objects
+	 */
 	public void stop() {
-		System.out.println("Application closing");
-		System.out.println(mc.getUsers());
 		ApplicationFileWriter.writeUserObjects(mc.getUsers());
 	}
 	
-	
+	/**
+	 * Main Starts application
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

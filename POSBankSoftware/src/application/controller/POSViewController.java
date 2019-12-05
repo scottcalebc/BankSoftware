@@ -25,35 +25,72 @@ import javafx.scene.control.TreeTableView.TreeTableViewSelectionModel;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.Pane;
 
+/**
+ * Controller for main view 
+ * @author Christopher Caleb Scott
+ *
+ */
 public class POSViewController implements Initializable, SubController {
 	
+	/**
+	 * Main Controller reference
+	 */
 	private MainController mc;	
 	
+	/**
+	 * data reference passed from main controller
+	 */
 	private ShowData data;
 	
 	
+	/**
+	 * Tree Table
+	 */
 	@FXML
 	private TreeTableView<ShowData> AccountTable;
 	
+	/**
+	 * Tree Table Columns
+	 */
 	@FXML
 	private TreeTableColumn<ShowData, String> AccountColumn, DateColumn, AmountColumn, TotalColumn;
 	
+	/**
+	 * Pie Chart reference
+	 */
 	@FXML
 	private PieChart piChart;
 	
+	/**
+	 * Radio Buttons to change Pie Chart data
+	 */
 	@FXML
 	private RadioButton piChartTransactions, piChartAccounts;
 	
+	/**
+	 * Toggle group for radio buttons
+	 */
 	@FXML 
 	private ToggleGroup piChartRadioBtns;
 	
+	/**
+	 * buttons to add/remove/edit transactions and accounts; logout
+	 */
 	@FXML
 	private Button DeleteTreeItemBtn, addTransactionBtn, addAccountBtn, logoutBtn, editBtn;
 	
+	/**
+	 * Labels to show totals from data passed
+	 */
 	@FXML
 	private Label totalAmount, totalAmountpiChart, lblMoneyIn, lblMoneyOut;
 	
 	
+	/**
+	 * Edit Button Handler to get selected item from tree table and pass to 
+	 * respective controller depending on what was selected (Account or Transaction)
+	 * @param event
+	 */
 	public void editShowData(ActionEvent event) {
 		TreeTableViewSelectionModel<ShowData> selectionModel = AccountTable.getSelectionModel();
 		
@@ -91,10 +128,21 @@ public class POSViewController implements Initializable, SubController {
 	}
 
 	
+	/**
+	 * Add Transaction Button Handler
+	 * updates view to Transaction view
+	 * @param event
+	 */
 	public void addTransaction(ActionEvent event) {
 		mc.updateView(this, MainController.addTanView, MainController.addTanX, MainController.addTanY);
 	}
 	
+	/**
+	 * Delete Button Handler
+	 * Removes an item from Tree Table based on what was selected 
+	 * then removes the (Account/Transaction) from (User/Account) respectively
+	 * @param event
+	 */
 	public void DeleteTreeItem(ActionEvent event) {
 		TreeTableViewSelectionModel<ShowData> selectionModel = AccountTable.getSelectionModel();
 		
@@ -115,6 +163,11 @@ public class POSViewController implements Initializable, SubController {
 		piChart.getData().removeIf(x -> x.getName().equals(obj.getName()));
 	}
 	
+	/**
+	 * Transaction radio button handler
+	 * Loads Pie Chart with Transaction data
+	 * @param event
+	 */
 	public void setPiChartTransactions(ActionEvent event) {
 		ArrayList<ShowData> data = new ArrayList<ShowData>();
 		for(ShowData sub : this.data.getChildren()) {
@@ -124,14 +177,27 @@ public class POSViewController implements Initializable, SubController {
 		
 	}
 	
+	/**
+	 * Account radio button handler
+	 * Loads pie chart with account data
+	 * @param event
+	 */
 	public void setPiChartAccounts(ActionEvent event) {
 		setPieChart(this.data.getChildren());
 	}
 	
+	/**
+	 * Add account button handler
+	 * Changes view to add account
+	 * @param event
+	 */
 	public void addAccount(ActionEvent event) {
 		mc.updateView(this, MainController.addAcctView, MainController.addAcctX, MainController.addAcctY);
 	}
 	
+	/**
+	 * Helper function to set cell factory of Tree table to correctly load data
+	 */
 	private void setCellFactory() {
 		AccountColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
 		DateColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("date"));
@@ -142,18 +208,32 @@ public class POSViewController implements Initializable, SubController {
 		TotalColumn.setStyle("-fx-alignment: CENTER;");
 	}
 	
+	/**
+	 * Helper function to write total amounts to view 
+	 * @param total
+	 * @param moneyIn
+	 * @param moneyOut
+	 */
 	private void setAmounts(double total, double moneyIn, double moneyOut) {
 		totalAmount.setText(String.format("$%.2f", total));
 		totalAmountpiChart.setText(String.format("$%.2f", total));
 		lblMoneyIn.setText(String.format("$%.2f", moneyIn));
-		lblMoneyOut.setText(String.format("0$%.2f", Math.abs(moneyOut)));
+		lblMoneyOut.setText(String.format("-$%.2f", Math.abs(moneyOut)));
 	}
 	
+	/**
+	 * Handler to retrieve new totals from user and write to view
+	 */
 	private void updateAmounts() {
 		double amounts[] = data.getTotals();
 		setAmounts(amounts[0], amounts[1], amounts[2]);
 	}
 	
+	/**
+	 * Helper function to build Tree Table recursively
+	 * @param data
+	 * @return
+	 */
 	public TreeItem<ShowData> buildTree(ShowData data) {
 		if (data.getChildren() == null) {
 			return new TreeItem<>(data);
@@ -167,6 +247,9 @@ public class POSViewController implements Initializable, SubController {
 		}
 	}
 	
+	/**
+	 * Interface method to get data from Main Controller load data onto view and enable functionality
+	 */
 	public void onLoad(ShowData data, MainController mc) {
 		this.mc = mc;
 		this.data = data;
@@ -202,6 +285,10 @@ public class POSViewController implements Initializable, SubController {
 		updateAmounts();
 	}
 	
+	/**
+	 * Interface method to return data to main controller
+	 * @return
+	 */
 	public ShowData onExit() {
 		return this.data;
 	}

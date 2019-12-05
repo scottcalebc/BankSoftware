@@ -2,7 +2,6 @@ package application.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import application.model.Accounts;
 import application.model.ShowData;
 import application.model.Transaction;
@@ -16,30 +15,58 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
+/**
+ * Controller for Add Transaction View
+ * @author Christopher Caleb Scott
+ *
+ */
 public class TransactionController implements SubController, Initializable{
+	/**
+	 * Reference to Main Controller
+	 */
 	private MainController mc;
+	/**
+	 * Data passed to controller
+	 */
 	private ShowData data;
+	/**
+	 * parent account if editing transaction data
+	 */
 	private Accounts parent;
+	/**
+	 * Flag to check if user passed or transaction
+	 */
 	private boolean userFlag = false;
 	
 	
+	/**
+	 * Text fields for transaction data
+	 */
 	@FXML
 	private TextField TransactionName, TransactionDate, TransactionAmount;
 	
-	@FXML
-	private TextArea Memo;
-	
+	/**
+	 * ComboBox for account names
+	 */
 	@FXML
 	private ComboBox<ShowData> accountComboBox;
 	
+	/**
+	 * Buttons to add transaction or cancel
+	 */
 	@FXML
 	private Button AddTransaction, cancelBtn;
 	
 	
+	/**
+	 * Add Transaction Handler
+	 * Validates text fields and then adds new transaction to account selected in combobox
+	 * Changes view back to main view
+	 * @param event
+	 */
 	public void addTransaction(ActionEvent event) {
 		//Add transaction to User
 		if (!validateTextFields(TransactionName, "[a-zA-z]+") && !validateTextFields(TransactionDate, "[0-9]{1,2}/[0-9]{1,2}/[0-9]{2}") && !validateTextFields(TransactionAmount, "[0-9]+(.[0-9]{2})*")) {
@@ -59,6 +86,10 @@ public class TransactionController implements SubController, Initializable{
 		mc.updateView(this, MainController.mainView, MainController.mainX, MainController.mainY);
 	}
 	
+	/**
+	 * Updates Transaction data
+	 * if transaction was passed to controller instead of user
+	 */
 	public void updateTransaction() {
 		Transaction tans = (Transaction)this.data;
 		tans.setName(TransactionName.getText());
@@ -75,6 +106,12 @@ public class TransactionController implements SubController, Initializable{
 		mc.updateView(this, MainController.mainView, MainController.mainX, MainController.mainY);
 	}
 	
+	/**
+	 * Helper function to validate textfields
+	 * @param field
+	 * @param fmt
+	 * @return
+	 */
 	public boolean validateTextFields(TextField field, String fmt) {
 		if (field.getText().matches(fmt))
 			return true;
@@ -82,6 +119,9 @@ public class TransactionController implements SubController, Initializable{
 	}
 	
 	@Override
+	/**
+	 * Interface method to load data in controller and update view
+	 */
 	public void onLoad(ShowData data, MainController mc) {
 		// TODO Auto-generated method stub
 		this.mc = mc;
@@ -166,6 +206,9 @@ public class TransactionController implements SubController, Initializable{
 	}
 
 	@Override
+	/**
+	 * Returns data to main controller
+	 */
 	public ShowData onExit() {
 		// TODO Auto-generated method stub
 		if (userFlag) {

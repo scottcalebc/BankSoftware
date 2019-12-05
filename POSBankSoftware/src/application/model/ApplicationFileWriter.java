@@ -10,14 +10,26 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Handlers reading and writing of serialized data to/from file
+ * @author Christopher Caleb Scott
+ *
+ */
 public class ApplicationFileWriter {
 	
+	/**
+	 * data file used
+	 */
 	private static String dataFile = "posbank.data";
 	
 	public ApplicationFileWriter() {
 		
 	}
 	
+	/**
+	 * Static method to write a list of users to file
+	 * @param users
+	 */
 	public static void writeUserObjects(ArrayList<Users> users) {
 		try {
 			FileOutputStream f = new FileOutputStream(new File(dataFile));
@@ -36,6 +48,10 @@ public class ApplicationFileWriter {
 	}
 	
 	@SuppressWarnings("unchecked")
+	/**
+	 * Reads data file and returns array list of users
+	 * @return
+	 */
 	public static ArrayList<Users> readUserObjects() {
 		ObjectInputStream oi;
 		FileInputStream fi;
