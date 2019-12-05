@@ -32,11 +32,11 @@ This is a test account pre-loaded with *username*:username *password*:password l
 * To Edit an Account or Transaction
     * Select the Account or Transaction from the table on the left and press the Edit Button
 
-- to Delete an Account or Transaction
-Select the Account or Transaction from the table on the left and press the Delete Button
+* To Delete an Account or Transaction
+    * Select the Account or Transaction from the table on the left and press the Delete Button
 
-- To View Accounts or Transactions with Pie Chart
-Select the respective radio button on the bottom-right hand side of screen
+* To View Accounts or Transactions with Pie Chart
+    * Select the respective radio button on the bottom-right hand side of screen
 
 ## Examples
 This shows the main view with the test accounts
