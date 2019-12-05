@@ -17,7 +17,7 @@ git clone https://github.com/scottcalebc/BankSoftware.git
 After clonining into directory open Eclipse and select
 *File > Import > Existing Projects into Workspace*
 
-Then browse and navigate to directory in which you cloned the git repository and select folder *POSBankSoftware*
+Then browse and navigate to the directory in which you cloned the git repository and select folder *POSBankSoftware*
 
 Select finish
 
