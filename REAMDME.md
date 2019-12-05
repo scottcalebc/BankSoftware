@@ -17,9 +17,9 @@ git clone https://github.com/scottcalebc/BankSoftware.git
 ```
 
 After clonining into directory open Eclipse and select
-File > Import > Existing Projects into Workspace
+*File > Import > Existing Projects into Workspace*
 
-Then browse and navigate to directory in which you cloned the git repository and select folder POSBankSoftware
+Then browse and navigate to directory in which you cloned the git repository and select folder *POSBankSoftware*
 
 Select finish
 
@@ -38,8 +38,8 @@ Simply Run Project from Eclipse to load application
 * [Eclipse](https://www.eclipse.org) - IDE used
 
 ## Authors
-Christopher Caleb Scott
-Nikki Thanapaisal
-Jonathan Becker
-Luke DeGoes
-Brenna Blusk
+* Christopher Caleb Scott
+* Nikki Thanapaisal
+* Jonathan Becker
+* Luke DeGoes
+* Brenna Blusk
