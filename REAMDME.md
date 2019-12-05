@@ -1,5 +1,5 @@
 # Plain Ordinary and Simple Banking Software
-
+A simple application to track personal accounts and purchases aggregating these into a clean graphical format breaking down flow of money to make better finacial decisions for your future
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Will need eclipse to build and run project
