@@ -40,10 +40,10 @@ This is a test account pre-loaded with *username*:username *password*:password. 
 
 ## Examples
 This shows the main view with the test accounts
-![Account](example1.png)
+![Account](example-1.png)
 
 This shows the main view with the test transactions
-![Transaction](example2.png)
+![Transaction](example-2.png)
 
 ### Features
 * Create User(s)
