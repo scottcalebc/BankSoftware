@@ -1,5 +1,5 @@
 # Plain Ordinary and Simple Banking Software
-A simple application to track personal accounts and purchases aggregating these into a clean graphical format breaking down flow of money to make better finacial decisions for your future.
+A simple application to track personal accounts and purchases, aggregating these into a clean graphical format that breaks down the flow of money to help you make better finacial decisions for your future.
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Eclipse is needed to build and run project.
@@ -14,7 +14,7 @@ First clone git repository into desired directory
 git clone https://github.com/scottcalebc/BankSoftware.git
 ```
 
-After clonining into directory open Eclipse and select
+After cloning into directory open Eclipse and select
 *File > Import > Existing Projects into Workspace*
 
 Then browse and navigate to the directory in which you cloned the git repository and select folder *POSBankSoftware*
@@ -27,7 +27,7 @@ Simply Run Project from Eclipse to load application
 
 ## Testing
 
-This is a test account pre-loaded with *username*:username *password*:password logging in with these credentials shows example accounts and transactions to edit or delete or add new ones.
+This is a test account pre-loaded with *username*:username *password*:password. Logging in with these credentials shows example accounts and transactions to edit or delete or add new ones.
 
 * To Edit an Account or Transaction
     * Select the Account or Transaction from the table on the left and press the Edit Button
